@@ -1,0 +1,6 @@
+<form id="create-form" method="post">
+    {% csrf_token %}
+    <label for="create-body">Create New Post:</label><br>
+    <textarea class="form-control" id="create-body" placeholder="Post Content..."></textarea>
+    <input type="submit" value="Post" class="btn-sm btn-primary">
+</form>

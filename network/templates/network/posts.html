@@ -1,0 +1,46 @@
+{% load tz %}
+
+{% if on_profile_page %}
+  {% include "network/profile.html" %}
+{% endif %}
+
+<h1 class="posts-label" id="{{ posts_label_type }}">{{ posts_label }}</h1>
+<div class="all-posts">
+    {% for post in page_x %}
+    <div class="post" id="{{post.id}}">
+        <div class="card-body" style="width: 600px; border-style: solid; border-color: lightcoral;">
+            <h5 class="card-title">Post w/ ID{{ post.id }}</h5>
+            <p class="card-text post-content" id="content-{{post.id}}">{{ post.content }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">
+                Posted on {{ post.created_on | timezone:"America/New_York" }} by <span class="user-link" data-user="{{post.poster.id}}">{{ post.poster }}</span>
+              </small>
+              <div>
+                <a id="like-{{post.id}}" href="" class="like">
+                    {% if request.user in post.likes.all %}Unlike{% else %}Like{% endif %}
+                </a>
+                <span class="badge bg-primary" id="numlikes-{{post.id}}">
+                  Likes: {{ post.likes.count }}
+                </span>
+              </div>
+            </div>
+            {% if request.user == post.poster %}
+                <button class="btn-sm btn-outline-secondary" id="edit-post" data-post="{{post.id}}">Edit post</button>
+            {% endif %}
+          </div>
+    </div>
+
+    {% empty %}
+       <h1>No posts yet</h1>
+    {% endfor %}
+</div>
+
+<div>
+    <br>
+    {% if page_x.has_previous %}
+        <button class="page-button" id="prev" data-page="{{ curr }}">prev</button>
+    {% endif %}
+    {% if page_x.has_next %}
+        <button class="page-button" id="next" data-page="{{ curr }}">next</button>
+    {% endif %}
+</div>

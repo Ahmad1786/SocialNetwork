@@ -1,0 +1,10 @@
+.user-link:hover {
+    color: red; 
+    font-weight: bold;
+    text-decoration: underline;
+
+}
+
+.post {
+    width: 800px;
+}

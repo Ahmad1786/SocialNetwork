@@ -1,0 +1,7 @@
+<h1 style="display: inline;">
+    Followers: <span id="followers">{{ user.followers.count }}</span> 
+    Following: <span id="following">{{ user.following.count }}</span> 
+</h1>
+{% if viewing_someone_else %}
+    <button id="follow-button" data-user="{{ user.id }}" data-action="{{ action }}">{{ follow_string }}</button>
+{% endif %}
